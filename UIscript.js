@@ -46,7 +46,7 @@
 
             // to get the display value of reference fields, a script include is called to pull this information
             // which is then passed back into this UI Script
-            var ga = new GlideAjax("storeUserDataInBrowser");
+            var ga = new GlideAjax("getDataForApty");
             ga.addParam("sysparm_name", "getData");
 
             // submit request to server, call ajaxResponse function with server response
