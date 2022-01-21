@@ -33,6 +33,16 @@
         return output;
     }
 
+    function getUserData() {
+        // call script include `getDataForApty` to pull user data using the `getData` function
+        // which is then passed back into this UI Script as an XML object
+        var ga = new GlideAjax("getDataForApty");
+        ga.addParam("sysparm_name", "getData");
+
+        // submit request to server, call ajaxResponse function with server response
+        ga.getXML(ajaxResponse);
+    }
+
     if (typeof jQuery !== 'function')
         return;
 
@@ -40,17 +50,16 @@
 
         var storage = top.CustomPropStorage;
 
-        // only run if props haven't updated in 7+ days
-        // or if stored data does not exist, or is undefined
-        if (!storage || typeof storage === 'undefined' || storage.whenToNextUpdateProps > nextWeek(storage.whenToNextUpdateProps)) {
+        if (storage) {
+            var storedDate = storage.whenToNextUpdateProps;
+            var needsUpdating = storedDate > nextWeek(storedDate);
 
-            // to get the display value of reference fields, a script include is called to pull this information
-            // which is then passed back into this UI Script
-            var ga = new GlideAjax("getDataForApty");
-            ga.addParam("sysparm_name", "getData");
-
-            // submit request to server, call ajaxResponse function with server response
-            ga.getXML(ajaxResponse);
+            if (needsUpdating) {
+                getUserData()
+            }
+        } else {
+            getUserData()
         }
+
     });
 })();
