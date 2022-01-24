@@ -25,9 +25,27 @@ The UI Script will call the Script Include and gather data about the user (confi
 5. Copy/paste the UI Script code into the code body
 6. Save, test
 
+#### Applying Scripts to Service Portal
+
+1. Navigate to **Service Portal > Dependencies**
+2. Create a new record
+3. Name it however you like
+4. Set the application scope
+5. Check the box for _"Include on Page Load"_
+6. Save and return to the new record
+7. Under _JS Includes_ click **Edit**
+8. Set the Display Name however you please
+9. Set the _Source_ to **UI Script**
+10. In the _UI Script_ field, locate the name of the UI Script, then save the record
+11. Navigate to **Service Portal > Widgets** and choose a widget that is loaded for all users
+    > I chose the "Stock Footer", but the choice is dependent on your configuration.
+12. Scroll down to the bottom, under the _Dependencies_ tab, click **Edit**
+13. In the slushbucket, find the Dependency you created in **step 3** and move it over
+14. Save the record
+
 ## Testing
 
 1. Navigating to any record will initiate the UI Script
 2. Open the dev console (browser) and type **top.CustomPropStorage**
 3. Your output should contain data about your user profile in ServiceNow
-   > **Note:** If testing is done in a PDI, many properties of _System Administrator_ (default admin account) are not set, like city, company, and location, among others. Impersonate another user with these set, or set them manually.
+   > **Note:** If testing is done in a PDI, many properties of _System Administrator_ (default admin account) are not set, like city, company, and location, among others. Impersonate another user with these properties set, or set them manually on the default account.
